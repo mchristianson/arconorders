@@ -1,0 +1,15 @@
+#Header .inner {
+    padding:10px 0;
+}
+#Header {
+	background-color: #35324F;
+	background-repeat: no-repeat;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#7a43b6), to(#35324F));
+	background-image: -webkit-linear-gradient(#7a43b6, #35324F);
+	background-image: -moz-linear-gradient(#7a43b6, #35324F);
+	background-image: -o-linear-gradient(top, #7a43b6, #35324F);
+	background-image: -khtml-gradient(linear, left top, left bottom, from(#7a43b6), to(#35324F));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7a43b6', endColorstr='#35324F', GradientType=0); /* IE8 and down */
+	
+	margin: 40px 0 0 0;
+}

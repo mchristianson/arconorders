@@ -1,0 +1,58 @@
+<html>=0D=0A<head>=0D=0A<meta http-equiv=3D'Content-Type' content=3D'text/html;=
+ charset=3Diso-8859-1'>=0D=0A</head>=0D=0A<style type=3D'text/css'>body,table,td=
+ {font: 11px Verdana; color: #000000;}</style>=0D=0A<body text=3D'#000000'>=
+=0D=0A<table width=3D'650' border=3D'1' cellspacing=3D'0' cellpadding=3D'20'=
+ bgcolor=3D'#FFFFFF' bordercolor=3D'#CCCCCC' align=3D'center'>=0D=0A <tr>=
+=0D=0A  <td>=0D=0A   <table width=3D'100%' border=3D'0' cellspacing=3D'1'=
+ cellpadding=3D'5'>=0D=0A    <tr valign=3D'top'> =0D=0A     <td><a href=3D'http://www.sstransportstore.com/Default.asp'><img=
+ src=3D"http://www.sstransportstore.com/v/vspfiles/templates/223/images/company/logo.png"=
+ border=3D0></a></td>=0D=0A		 <td align=3D'right'>CustomerID# 9</td>=0D=0A=
+		</tr>=0D=0A	 </table>=0D=0A	 <br>=0D=0A   <br>=0D=0A   Thank you for your=
+ order. Your order number is 8, placed 11/28/2012=0D=0A   at 01:59PM. <br>=
+=0D=0A   <br>=0D=0A   <table width=3D'100%' border=3D'0' cellspacing=3D'1'=
+ cellpadding=3D'5'>=0D=0A    <tr valign=3D'top'> =0D=0A     <td><b>Bill=
+ To:</b><br> <br>=0D=0A      sstransport<br /> kelly&nbsp;seng<br>=0D=0A=
+      1774 lydia circle<br>=0D=0A       grand forks, ND&nbsp;58201 =0D=0A=
+      <br>=0D=0A      United States <br>=0D=0A      7017725741<br>=0D=0A=
+			kellymseng@hotmail.com<br>=0D=0A			<br></td>=0D=0A     <td><b>Ship To:</b><br>=
+ <br>=0D=0A      sstransport<br /> kelly&nbsp;seng<br>=0D=0A      1774 lydia=
+ circle<br>=0D=0A       grand forks, ND&nbsp;58201 =0D=0A      <br>=0D=0A=
+      United States <br>=0D=0A      7017725741 <br> </td>=0D=0A    </tr>=
+=0D=0A    <tr valign=3D'top'> =0D=0A     <td><b>Payment Info:</b> <br> <br>=
+=0D=0A      <b>NONE</b><br> <br> </td>=0D=0A     <td><b>Shipping Method:</b><br>=
+ <br>=0D=0A      Free Shipping (7 Day Ground)<br> </td>=0D=0A    </tr>=0D=0A=
+    <tr valign=3D'top'> =0D=0A     <td colspan=3D'2'><b>Order Details:</b><br>=
+ <br>=0D=0A      <table width=3D"100%" bgcolor=3D"#EEEEEE"><tr><td><b>Code</b></td><td><b>Item</b></td><td><b>Qty</b></td><td><b>Price</b></td><td><b>Grand=
+ Total</b></td></tr><tr><td>G240-SS</td><td>Gildan Long Sleeve T-shirt<br=
+ />[Color:Navy]<BR>[Size:M]</td><td>1</td><td><nobr>$15.00</nobr></td><td><nobr>$15.00</nobr></td></tr><tr><td>CP90-SS</td><td>Port=
+ & Company - Knit Cap<br />[Color:Black]</td><td>1</td><td><nobr>$10.00</nobr></td><td><nobr>$10.00</nobr></td></tr><tr><td>DSC-58</td><td>$25=
+ Gift Code <br /></td><td>1</td><td><nobr>-$25.00</nobr></td><td><nobr>-$25.00</nobr></td></tr><tr><td>DSC-68</td><td>Free=
+ Shipping <br /></td><td>1</td><td><nobr>$0.00</nobr></td><td><nobr>$0.00</nobr></td></tr><tr><td=
+ colspan=3D5>&nbsp;</td></tr><tr><td colspan=3D3>&nbsp;</td><td align=3D"right">=
+ Subtotal: </td><td>$0.00</td></tr><tr><td colspan=3D3>&nbsp;</td><td align=3D"right">=
+ Tax: </td><td>$0.00</td></tr><tr><td colspan=3D3>&nbsp;</td><td align=3D"right">=
+ Shipping Cost: </td><td>$0.00</td></tr><tr><td colspan=3D3>&nbsp;</td><td=
+ align=3D"right"> Grand Total: </td><td>$0.00</td></tr></table> <br> </td>=
+=0D=0A    </tr>=0D=0A   </table>=0D=0A=0D=0A=0D=0A=0D=0A   <br>=0D=0A  =
+ Thank you for shopping at www.sstransportstore.com!<br>=0D=0A   Visit us=
+ again at <a href=3D'http://www.sstransportstore.com/'>http://www.sstransportstore.com/</a></td>=
+=0D=0A </tr>=0D=0A</table>=0D=0A#xmlstart#=0D=0A<xml>=0D=0A<orderID>268</orderID>=
+=0D=0A<storeName>www.sstransportstore.com</storeName>=0D=0A<customerID>9</customerID>=
+=0D=0A<orderDate>11/28/2012 01:59PM</orderDate>=0D=0A<firstName>kelly</firstName>=
+=0D=0A<lastName>seng</lastName>=0D=0A<address1>1774 lydia circle</address1>=
+=0D=0A=0D=0A<city> grand forks</city>=0D=0A<state>ND</state>=
+=0D=0A<postalCode>58201 </postalCode>=0D=0A<country>United States</country>=
+=0D=0A=0D=0A<details>=0D=0A<table width=3D"100%" bgcolor=3D"#EEEEEE"><tr><td><b>Code</b></td><td><b>Item</b></td><td><b>Qty</b></td><td><b>Price</b></td><td><b>Grand=
+ Total</b></td></tr><tr><td>G240-SS</td><td>Gildan Long Sleeve T-shirt<br=
+ />[Color:Navy]<BR>[Size:M]</td><td>1</td><td><nobr>$15.00</nobr></td><td><nobr>$15.00</nobr></td></tr><tr><td>CP90-SS</td><td>Port=
+ & Company - Knit Cap<br />[Color:Black]</td><td>1</td><td><nobr>$10.00</nobr></td><td><nobr>$10.00</nobr></td></tr><tr><td>DSC-58</td><td>$25=
+ Gift Code <br /></td><td>1</td><td><nobr>-$25.00</nobr></td><td><nobr>-$25.00</nobr></td></tr><tr><td>DSC-68</td><td>Free=
+ Shipping <br /></td><td>1</td><td><nobr>$0.00</nobr></td><td><nobr>$0.00</nobr></td></tr><tr><td=
+ colspan=3D5>&nbsp;</td></tr><tr><td colspan=3D3>&nbsp;</td><td align=3D"right">=
+ Subtotal: </td><td>$0.00</td></tr><tr><td colspan=3D3>&nbsp;</td><td align=3D"right">=
+ Tax: </td><td>$0.00</td></tr><tr><td colspan=3D3>&nbsp;</td><td align=3D"right">=
+ Shipping Cost: </td><td>$0.00</td></tr><tr><td colspan=3D3>&nbsp;</td><td=
+ align=3D"right"> Grand Total: </td><td>$0.00</td></tr></table>=0D=0A</details>=
+=0D=0A</xml>=0D=0A#xmlend#=0D=0A</body>=0D=0A</html>
+
+
