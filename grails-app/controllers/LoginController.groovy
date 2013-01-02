@@ -1,3 +1,4 @@
+import com.arconorders.User
 import grails.converters.JSON
 
 import javax.servlet.http.HttpServletResponse
@@ -36,6 +37,9 @@ class LoginController {
 		}
 	}
 
+    def register() {
+        User user = new User(params)
+    }
 	/**
 	 * Show the login page.
 	 */

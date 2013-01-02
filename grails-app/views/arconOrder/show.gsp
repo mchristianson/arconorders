@@ -6,7 +6,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="layout" content="kickstart" />
-	<g:set var="entityName" value="${message(code: 'arconOrder.label', default: 'ArconOrder')}" />
+	<g:set var="entityName" value="${message(code: 'arconOrder.label', default: 'Order')}" />
 	<title><g:message code="default.show.label" args="[entityName]" /></title>
 </head>
 

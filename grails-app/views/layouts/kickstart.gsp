@@ -65,6 +65,7 @@
 	<g:if test="${ pageProperty(name:'page.include.bottom') }">
    		<g:pageProperty name="page.include.bottom" />
 	</g:if>
+    <g:render template="/_common/modals/registerDialog" model="[item: item]"/>
 
     <r:script>
         $(document).ready(function () {

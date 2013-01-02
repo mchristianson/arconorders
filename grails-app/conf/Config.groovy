@@ -1,32 +1,36 @@
-// locations to search for config files that get merged into the main config;
-// config files can be ConfigSlurper scripts, Java properties files, or classes
-// in the classpath in ConfigSlurper format
+import static grails.util.Environment.*
 
-// grails.config.locations = [ "classpath:${appName}-config.properties",
+// locations to search for config files that get merged into the main config
+// config files can either be Java properties files or ConfigSlurper scripts
+
+//grails.config.locations = [ "classpath:${appName}-config.properties",
 //                             "classpath:${appName}-config.groovy",
 //                             "file:${userHome}/.grails/${appName}-config.properties",
 //                             "file:${userHome}/.grails/${appName}-config.groovy"]
 
-// if (System.properties["${appName}.config.location"]) {
-//    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
-// }
+def configLocation = System.getenv('ARCON_CONFIG_LOCATION') ?: "${userHome}/.grails"
+//def configFilePath = "file:$configLocation/$appName-config.groovy"
+def configFilePath = "file:$configLocation/$appName-config.groovy"
+println "**** Externalized config file directory is $configFilePath"
+grails.config.locations = [configFilePath]
+
+grails.plugin.databasemigration.changelogFileName = "changelog.groovy"
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
-grails.mime.types = [
-    all:           '*/*',
+grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
+                      xml: ['text/xml', 'application/xml'],
+                      text: 'text/plain',
+                      js: 'text/javascript',
+                      rss: 'application/rss+xml',
     atom:          'application/atom+xml',
     css:           'text/css',
     csv:           'text/csv',
+                      all: '*/*',
+                      json: ['application/json','text/json'],
     form:          'application/x-www-form-urlencoded',
-    html:          ['text/html','application/xhtml+xml'],
-    js:            'text/javascript',
-    json:          ['application/json', 'text/json'],
-    multipartForm: 'multipart/form-data',
-    rss:           'application/rss+xml',
-    text:          'text/plain',
-    xml:           ['text/xml', 'application/xml']
+                      multipartForm: 'multipart/form-data'
 ]
 
 // URL Mapping Cache Max Size, defaults to 5000
@@ -34,6 +38,7 @@ grails.mime.types = [
 
 // What URL patterns should be processed by the resources plugin
 grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*']
+
 
 // The default codec used to encode data with ${}
 grails.views.default.codec = "none" // none, html, base64
@@ -56,7 +61,7 @@ grails.web.disable.multipart=false
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
 
-// configure auto-caching of queries by default (if false you can cache individual queries with 'cache: true')
+// enable query caching by default
 grails.hibernate.cache.queries = false
 
 environments {
@@ -64,6 +69,7 @@ environments {
         grails.logging.jul.usebridge = true
     }
     production {
+        grails.app.context = "/"
         grails.logging.jul.usebridge = false
         // TODO: grails.serverURL = "http://www.changeme.com"
     }
@@ -71,11 +77,37 @@ environments {
 
 // log4j configuration
 log4j = {
-    // Example of changing the log pattern for the default console appender:
-    //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
+    appenders {
+        'null' name: 'stacktrace'
+
+        def gbPattern = ""
+        if (getCurrentEnvironment() in [DEVELOPMENT, TEST, CUSTOM]) {
+            gbPattern += '%d{HH:mm:ss}'
+        } else {
+            gbPattern += '%d{dd MMM yyyy HH:mm:ss}'
+        }
+        gbPattern += ' [%X{user_rid},%X{user_name},%X{user_action}] [%5p] %-30.30c{2} %m%n'
+        gbPattern = pattern(conversionPattern: gbPattern)
+
+        console name: 'stdout', layout: gbPattern
+
+        // this is a little screwy, better way?  looks for logs directory, if it doesn't exist looks in /usr/share/tomcat6/logs
+//        def logfile = "${new File('./logs').exists() ? './logs' : logDirectory}/arconorders-${getCurrentEnvironment()}.log"
+        def logfile = "/opt/tomcat-7/logs/arconorders.log"
+        appender new org.apache.log4j.DailyRollingFileAppender(name: 'logfile', fileName: logfile, datePattern: "'.'yyyy-MM-dd", layout: gbPattern)
+    }
+
+    // environment specific overrides
+    root {
+        if (getCurrentEnvironment() in [DEVELOPMENT]) {
+            info('stdout', 'logfile')
+        } else if (getCurrentEnvironment() in [TEST, CUSTOM]) {
+            info('logfile')
+        } else {
+            info('logfile')
+        }
+        additivity = false
+    }
 
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP
@@ -86,10 +118,11 @@ log4j = {
            'org.codehaus.groovy.grails.plugins',            // plugins
            'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
            'org.springframework',
+            'com.energizedwork',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
-    trace 'org.hibernate.type'
-    debug 'org.hibernate.SQL'
+//    trace 'org.hibernate.type'
+//    debug 'org.hibernate.SQL'
 }
 
 grails.config.defaults.locations = [KickstartResources]
@@ -126,3 +159,5 @@ grails {
               "mail.smtp.socketFactory.fallback":"false"]
    }
 }
+
+grails.plugin.cloudfoundry.showStackTrace = true

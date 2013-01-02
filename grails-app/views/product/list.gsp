@@ -7,6 +7,34 @@
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'product.label', default: 'Product')}" />
 	<title><g:message code="default.list.label" args="[entityName]" /></title>
+    <r:require modules="datatables"/>
+    <g:javascript>
+            $(function() {
+                $('.datatablea').dataTable({
+                    'sPaginationType': 'bootstrap',
+                    aoColumns: [
+                        {sName: "vendorCode"},
+                        {sName: "dubowProductId"},
+                        {sName: "code"},
+                        {sName: "name"},
+                        {sName: "mill"},
+                        {sName: "color"},
+                        {sName: "colorWay"},
+                        {sName: "designNumber"}
+                      ]
+                }).makeEditable({
+                    sUpdateURL: '<g:createLink action="updateRow"/>',
+                    sAddURL:  '<g:createLink action="save"/>',
+                    oAddNewRowFormOptions: {
+                        title: 'Add a new product',
+                        show: "blind",
+                        hide: "explode",
+                        width: "600px"
+                    }
+               });
+
+            });
+    </g:javascript>
 </head>
 
 <body>
@@ -15,23 +43,22 @@
     <g:link action="verifyProducts" class="btn btn-danger">Verify Products</g:link>
 </p>
 <section id="list-product" class="first">
+    <form class="plain" action="" method="post" enctype="multipart/form-data">
 
-    <table class="table table-bordered">
+    <table class="table table-bordered datatablea">
         <thead>
         <tr>
 
-            <g:sortableColumn property="vendorCode" title="${message(code: 'product.vendorCode.label', default: 'Vendor Code')}" />
+            <th>Vendor Code</th>
 
-            <g:sortableColumn property="dubowProductId" title="${message(code: 'product.dubowProductId.label', default: 'Dubow Product Id')}" />
+            <th>Dubow Product Id</th>
 
-            <g:sortableColumn property="code" title="${message(code: 'product.code.label', default: 'Code')}" />
-
-            <g:sortableColumn property="name" title="${message(code: 'product.name.label', default: 'Name')}" />
-
-            <g:sortableColumn property="mill" title="${message(code: 'product.mill.label', default: 'Mill')}" />
-
-            <g:sortableColumn property="color" title="${message(code: 'product.color.label', default: 'Color')}" />
-
+            <th>Code</th>
+            <th>Name</th>
+            <th>Mill</th>
+            <th>Color</th>
+            <th>Colorway</th>
+            <th>Design Number</th>
         </tr>
         </thead>
         <tbody>
@@ -49,14 +76,16 @@
 				<td>${fieldValue(bean: productInstance, field: "mill")}</td>
 			
 				<td>${fieldValue(bean: productInstance, field: "color")}</td>
-			
+
+				<td>${fieldValue(bean: productInstance, field: "colorWay")}</td>
+
+				<td>${fieldValue(bean: productInstance, field: "designNumber")}</td>
+
 			</tr>
 		</g:each>
 		</tbody>
 	</table>
-	<div class="pagination">
-		<bs:paginate total="${productInstanceTotal}" />
-	</div>
+        </form>
 </section>
 
 </body>

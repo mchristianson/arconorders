@@ -77,7 +77,7 @@ class OrderProcessingService {
                                 IntegrationManifest {
                                     DateToShip((now + 7).format('MM/dd/yyyy'))
                                     def fullAddress = (order.address1 + order.address2).toLowerCase()
-                                    def shippingMethod = (fullAddress.contains('box')) ? 'USPS' : (order.state == 'MN') ? 'SPEDE' : 'UPSG'
+                                    def shippingMethod = getShippingMethod(fullAddress, order.state)
                                     ShipMethodAbbreviation(shippingMethod)
                                     ShipToAddress() {
                                         Address1(order.firstName + ' ' + order.lastName)
@@ -229,5 +229,9 @@ class OrderProcessingService {
         def response = orders.post(body: '<?xml version="1.0" encoding="utf-8"?>', contentType: groovyx.net.http.ContentType.XML, headers: [Accept: 'text/xml'])
         println response
 
+    }
+
+    private getShippingMethod(fullAddress, state) {
+        (fullAddress.contains('box')) ? 'USPS' : (['MN', 'ND', 'SD', 'NE', 'IA', 'IL', 'WI'].contains(state)) ? 'SPEDE' : 'UPSG'
     }
 }

@@ -25,14 +25,20 @@ class ProductController {
         render results
     }
 
+    def updateRow() {
+        def productInstance = Product.get(params.id)
+        productInstance."${params.columnName}" = params.value
+        println productInstance
+        productInstance.save()
+        render params.value
+    }
 
     def index() {
         redirect(action: "list", params: params)
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [productInstanceList: Product.list(params), productInstanceTotal: Product.count()]
+        [productInstanceList: Product.list(), productInstanceTotal: Product.count()]
     }
 
     def create() {

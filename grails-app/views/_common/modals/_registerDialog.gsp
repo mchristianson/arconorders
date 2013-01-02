@@ -6,9 +6,9 @@
 	</div>
 	<div class="modal-body">
 		<div class="control-group">
-			<label class="control-label" for="firstname">${message(code: 'security.firstname.label', default: 'Firstname')}</label>
+			<label class="control-label" for="firstName">${message(code: 'security.firstName.label', default: 'firstName')}</label>
 			<div class="controls">
-				<input type="text" class="span3" name="firstname" id="firstname" placeholder="${message(code: 'security.firstname.label', default: 'Firstname')}">
+				<input type="text" class="span3" name="firstName" id="firstname" placeholder="${message(code: 'security.firstname.label', default: 'First name')}">
 			</div>
 		</div>
 		<div class="control-group">

@@ -1,13 +1,13 @@
 dataSource {
     pooled = true
     driverClassName = "com.mysql.jdbc.Driver"
-    logSql = true
+    logSql = false
 }
 hibernate {
-    cache.use_second_level_cache = true
-    cache.use_query_cache = true
-    cache.provider_class = 'net.sf.ehcache.hibernate.EhCacheProvider'
-    cache.region.factory_class = 'net.sf.ehcache.hibernate.EhCacheRegionFactory'
+    cache.use_second_level_cache = false
+    cache.use_query_cache = false
+//    cache.provider_class = 'net.sf.ehcache.hibernate.EhCacheProvider'
+//    cache.region.factory_class = 'net.sf.ehcache.hibernate.EhCacheRegionFactory'
 }
 // environment specific settings
 environments {
