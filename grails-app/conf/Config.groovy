@@ -24,12 +24,12 @@ grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
                       text: 'text/plain',
                       js: 'text/javascript',
                       rss: 'application/rss+xml',
-    atom:          'application/atom+xml',
-    css:           'text/css',
-    csv:           'text/csv',
+                      atom: 'application/atom+xml',
+                      css: 'text/css',
+                      csv: 'text/csv',
                       all: '*/*',
                       json: ['application/json','text/json'],
-    form:          'application/x-www-form-urlencoded',
+                      form: 'application/x-www-form-urlencoded',
                       multipartForm: 'multipart/form-data'
 ]
 
@@ -76,55 +76,26 @@ environments {
 }
 
 // log4j configuration
-log4j = {
-    appenders {
-        'null' name: 'stacktrace'
+og4j = {
+    // Example of changing the log pattern for the default console
+    // appender:
+    //
+    //appenders {
+    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+    //}
 
-        def gbPattern = ""
-        if (getCurrentEnvironment() in [DEVELOPMENT, TEST, CUSTOM]) {
-            gbPattern += '%d{HH:mm:ss}'
-        } else {
-            gbPattern += '%d{dd MMM yyyy HH:mm:ss}'
-        }
-        gbPattern += ' [%X{user_rid},%X{user_name},%X{user_action}] [%5p] %-30.30c{2} %m%n'
-        gbPattern = pattern(conversionPattern: gbPattern)
-
-        console name: 'stdout', layout: gbPattern
-
-        // this is a little screwy, better way?  looks for logs directory, if it doesn't exist looks in /usr/share/tomcat6/logs
-//        def logfile = "${new File('./logs').exists() ? './logs' : logDirectory}/arconorders-${getCurrentEnvironment()}.log"
-        def logfile = "/opt/tomcat-7/logs/arconorders.log"
-        appender new org.apache.log4j.DailyRollingFileAppender(name: 'logfile', fileName: logfile, datePattern: "'.'yyyy-MM-dd", layout: gbPattern)
-    }
-
-    // environment specific overrides
-    root {
-        if (getCurrentEnvironment() in [DEVELOPMENT]) {
-            info('stdout', 'logfile')
-        } else if (getCurrentEnvironment() in [TEST, CUSTOM]) {
-            info('logfile')
-        } else {
-            info('logfile')
-        }
-        additivity = false
-    }
-
-    error  'org.codehaus.groovy.grails.web.servlet',        // controllers
-           'org.codehaus.groovy.grails.web.pages',          // GSP
-           'org.codehaus.groovy.grails.web.sitemesh',       // layouts
+    error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
+           'org.codehaus.groovy.grails.web.pages', //  GSP
+           'org.codehaus.groovy.grails.web.sitemesh', //  layouts
            'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-           'org.codehaus.groovy.grails.web.mapping',        // URL mapping
-           'org.codehaus.groovy.grails.commons',            // core / classloading
-           'org.codehaus.groovy.grails.plugins',            // plugins
-           'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
+           'org.codehaus.groovy.grails.web.mapping', // URL mapping
+           'org.codehaus.groovy.grails.commons', // core / classloading
+           'org.codehaus.groovy.grails.plugins', // plugins
+           'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
            'org.springframework',
-            'com.energizedwork',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
-//    trace 'org.hibernate.type'
-//    debug 'org.hibernate.SQL'
 }
-
 grails.config.defaults.locations = [KickstartResources]
 // Added by the Spring Security Core plugin:
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.arconorders.User'

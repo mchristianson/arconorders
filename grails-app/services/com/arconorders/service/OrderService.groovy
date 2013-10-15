@@ -18,11 +18,11 @@ class OrderService {
     def errors = []
 
     public parseOrders() {
-        def emailMessages = emailService.getEmailStub()
-//        def emailMessages = emailService.getEmail()
+//        def emailMessages = emailService.getEmailStub()
+        def emailMessages = emailService.getEmail()
 
         def orders = []
-        emailMessages.each { message ->
+        emailMessages.findAll {it.contains('#xmlstart#')} .each { message ->
 
             def xmlstart = message.indexOf('#xmlstart#')+10
             def xmlend = message.indexOf('#xmlend#')-1

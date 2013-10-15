@@ -64,10 +64,8 @@ class ArconOrderController {
     }
 
     def list() {
-        params.sort = params.sort ?: 'orderDate'
-        params.order = params.order ?: 'desc'
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [arconOrderInstanceList: ArconOrder.list(params), arconOrderInstanceTotal: ArconOrder.count()]
+        def list = ArconOrder.list()
+        [arconOrderInstanceList: list, arconOrderInstanceTotal: ArconOrder.count()]
     }
 
     def create() {

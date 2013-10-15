@@ -9,8 +9,9 @@ class ProductService {
     def errors = []
 
     def verifyProduct(vendorCode, mill) {
-
-        RESTClient productVerify = new RESTClient(url + "?partname=${ URLEncoder.encode(vendorCode)}&mill=${ URLEncoder.encode(mill)}")
+        String urlWithParams = "${url}?partname=${ URLEncoder.encode(vendorCode)}"
+        if (mill) urlWithParams += "&mill=${ URLEncoder.encode(mill)}"
+        RESTClient productVerify = new RESTClient(urlWithParams)
         print "[code:${vendorCode},mill:${mill}]"
         def response = productVerify.get(contentType: groovyx.net.http.ContentType.XML, headers: [Accept: 'text/xml'])
         println " FOUND? $response.data"

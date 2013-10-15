@@ -49,6 +49,7 @@ grails.project.dependency.resolution = {
         compile ":quartz2:0.2.3"
         compile ":jxl:0.54"
         compile ":rest:0.7"
+        compile ":kickstart-with-bootstrap:0.9.6"
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0"
         //runtime ":cached-resources:1.0"

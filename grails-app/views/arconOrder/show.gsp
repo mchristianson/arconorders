@@ -147,7 +147,7 @@
         <tbody>
             <g:each in="${arconOrderInstance.orderDetails}" var="o">
                 <tr>
-                    <td>${o.productCode}</td>
+                    <td><g:link controller="product" action="show" id="${o.product.id}">${o.productCode}</g:link> </td>
                     <td>${o.productName}</td>
                     <td>${o.quantity}</td>
                     <td>${o.productOptions}</td>
