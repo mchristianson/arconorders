@@ -14,21 +14,24 @@ class ProductController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def verifyProducts() {
-        def results = productService.verifyAllProducts()
-        [products: results]
+        productService.verifyAllProducts()
+        flash.message = 'Successfully verified all products.'
+        redirect(action: "list", params: params)
     }
 
     def verifyProduct() {
         def product = Product.read(params.id)
-        Boolean verified = productService.verifyProduct(product.vendorCode, product.mill).toBoolean()
-        String results = "<div class=\"alert alert-${verified?'success':'error'}\">${verified?"Verified":"Not Found"}</div>"
-        render results
+        product = productService.verifyProduct(product)
+        String message = product.dubowProductName ?
+            "<div class=\"alert alert-success\">${product.dubowProductName} - ${product.dubowProductDesc}</div>" :
+            "<div class=\"alert alert-error\">Product ID: ${product.dubowProductId} was not found at dubow!</div>"
+        render message
     }
 
     def updateRow() {
         def productInstance = Product.get(params.id)
         productInstance."${params.columnName}" = params.value
-        println productInstance
+        productInstance = productService.verifyProduct(productInstance)
         productInstance.save()
         render params.value
     }
@@ -51,6 +54,7 @@ class ProductController {
             render(view: "create", model: [productInstance: productInstance])
             return
         }
+        productInstance = productService.verifyProduct(productInstance)
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'product.label', default: 'Product'), productInstance.id])
         redirect(action: "show", id: productInstance.id)
@@ -103,6 +107,7 @@ class ProductController {
             render(view: "edit", model: [productInstance: productInstance])
             return
         }
+        productInstance = productService.verifyProduct(productInstance)
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'product.label', default: 'Product'), productInstance.id])
         redirect(action: "show", id: productInstance.id)

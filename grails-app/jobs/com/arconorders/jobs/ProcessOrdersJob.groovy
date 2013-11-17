@@ -1,5 +1,8 @@
 package com.arconorders.jobs
 
+import com.arconorders.OrderError
+import com.arconorders.exception.OrderProcessingException
+
 class ProcessOrdersJob {
     def orderProcessingService
     static triggers = {
@@ -8,6 +11,10 @@ class ProcessOrdersJob {
     def group = "Orders"
 
     def execute() {
-        orderProcessingService.processOrders()
+        try {
+            orderProcessingService.processOrders()
+        } catch (OrderProcessingException e) {
+            new OrderError(orderId: e.orderId, error: e.message).save()
+        }
     }
 }

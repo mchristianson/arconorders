@@ -5,6 +5,7 @@ import com.arconorders.ArconOrder
 import com.arconorders.Product
 import com.arconorders.Site
 import com.arconorders.OrderError
+import com.arconorders.exception.OrderProcessingException
 import org.htmlcleaner.HtmlCleaner
 import org.htmlcleaner.SimpleXmlSerializer
 
@@ -14,10 +15,8 @@ import static groovy.xml.XmlUtil.serialize
 class OrderService {
 
     def emailService
-    def messages = []
-    def errors = []
 
-    public parseOrders() {
+    public List<ArconOrder> parseOrders() throws OrderProcessingException {
 //        def emailMessages = emailService.getEmailStub()
         def emailMessages = emailService.getEmail()
 
@@ -38,12 +37,45 @@ class OrderService {
 
             // Parse the XML into a document we can work with
             def orderXml = new XmlSlurper(false,false).parseText(xml).body.xml
-            println serialize(orderXml)
-            Site site = Site.findByBaseUrl(orderXml.storename.text())
-            ArconOrder order = ArconOrder.findByOrderIDAndSite(orderXml.orderid.text(), site)
-            if (!order) {
 
-                order = new ArconOrder('orderID': orderXml.orderid.text(),
+            Site site = Site.findByBaseUrl(orderXml.storename.text())
+            String orderId = orderXml.orderid?.text()?.toString()
+            if (!site) throw new OrderProcessingException(orderId, "Cannot find site [${orderXml.storename.text()}]. Arcon Order NOT created.")
+            ArconOrder existingOrder = ArconOrder.findByOrderIDAndSite(orderXml.orderid.text(), site)
+
+            if (!existingOrder) {
+                println serialize(orderXml)
+                if (!orderXml.details.table.tbody.tr) throw new OrderProcessingException(orderId, "Cannot find order details in ${orderXml}. Arcon Order NOT created.")
+
+                List<OrderDetail> orderDetails = []
+                orderXml.details.table.tbody.tr.each { details ->
+                    def productCode = details.td[0].text()
+                    println "productCode: [$productCode]"
+                    if (productCode.trim() != "\u00A0" && productCode != 'Code' && !productCode.contains('DSC') && !productCode.contains('FLB-8000-DT')) {
+
+
+                        def detailsText = details.td[1].text().replace("\u00A0", '')
+                        def addition = detailsText[0] == '[' ? 1 : 0
+                        def productName = detailsText[addition..detailsText.indexOf('[',addition)-1]
+                        def productOptions = detailsText[detailsText.indexOf('[',addition)..-1-addition]
+                        println "productName: $productName"
+                        println "productOptions: $productOptions"
+
+                        OrderDetail orderDetail = new OrderDetail(
+                                productCode: productCode,
+                                quantity: details.td[2].text() as Integer,
+                                productName: productName,
+                                productOptions: productOptions
+                        )
+
+                        Product product = Product.findByCodeAndColor(productCode, orderDetail.getOption('color'))
+                        if (!product)  throw new OrderProcessingException(orderId, "Error: Cannot find product for [code:${productCode}, color:${orderDetail.getOption('color')}]. Arcon Order NOT created.")
+
+                        orderDetail.product = product
+                        orderDetails << orderDetail
+                    }
+                }
+                ArconOrder order = new ArconOrder('orderID': orderXml.orderid.text(),
                         site: site,
                         customerID: orderXml.customerid.text(),
                         orderDate: orderXml.orderdate.text(),
@@ -56,45 +88,16 @@ class OrderService {
                         postalCode: orderXml.postalcode.text(),
                         country: orderXml.country.text(),
                         comments: orderXml.comments.text())
-
-                orderXml.details.table.tbody.tr.each { details ->
-                    def productCode = details.td[0].text()
-                    println "productCode: [$productCode]"
-                    if (productCode.trim() != "\u00A0" && productCode != 'Code' && !productCode.contains('DSC') && !productCode.contains('FLB-8000-DT')) {
-
-                        def detailsText = details.td[1].text().replace("\u00A0", '')
-                        def addition = detailsText[0] == '[' ? 1 : 0
-                        def productName = detailsText[addition..detailsText.indexOf('[',addition)-1]
-                        def productOptions = detailsText[detailsText.indexOf('[',addition)..-1-addition]
-                        println "productName: $productName"
-                        println "productOptions: $productOptions"
-
-                        println productOptions
-                        OrderDetail orderDetail = new OrderDetail(
-                                productCode: productCode,
-                                quantity: details.td[2].text() as Integer,
-                                productName: productName,
-                                productOptions: productOptions,
-                                arconOrder: order
-                        )
-                        Product product = Product.findByCodeAndColor(productCode, orderDetail.getOption('color'))
-                        if (!product) {
-                            def orderError = new OrderError(orderId: orderXml.orderid.text(), error: "Cannot find product for ${productCode} / ${productOptions}").save()
-                            errors << orderError
-                        } else {
-                            orderDetail.product = product
-                        }
-                        order.addToOrderDetails(orderDetail)
-                        order.save()
-                        orderDetail.arconOrder = order
-                        println orderDetail.arconOrder
-                        orderDetail.save()
-                    }
+                order.save(failOnError: true)
+                orderDetails.each { orderDetail ->
+                    orderDetail.arconOrder = order
+                    orderDetail.save(failOnError: true)
+                    order.addToOrderDetails(orderDetail)
                 }
                 order.save(failOnError: true)
                 orders << order
             } else {
-                messages << "order ${orderXml.orderid.text()} already processed."
+                println "Order ${existingOrder} already processed."
             }
         }
         orders

@@ -1,5 +1,6 @@
 package com.arconorders
 
+import com.arconorders.exception.OrderProcessingException
 import com.arconorders.util.ArconUtil
 import org.springframework.dao.DataIntegrityViolationException
 
@@ -17,45 +18,24 @@ class ArconOrderController {
     def resendOrder() {
         ArconOrder arconOrderInstance = ArconOrder.get(params.id)
         arconOrderInstance.orderDetails.each {it.attachProduct()}
-        orderProcessingService.convertAndSendOrders([arconOrderInstance])
-        if (orderProcessingService.errors) {
-            flash.error = ArconUtil.convertMessageToString(orderProcessingService.errors, true)
+        try {
+            orderProcessingService.convertAndSendOrders([arconOrderInstance])
+            flash.message = "${arconOrderInstance} order sent successfully."
+        } catch (OrderProcessingException e) {
+            new OrderError(orderId: arconOrderInstance.id?.toString(), error: e.message)
+            flash.error = ArconUtil.convertMessageToString([e.message], true)
         }
-        if (orderProcessingService.messages) {
-            flash.message += ArconUtil.convertMessageToString(orderProcessingService.messages, false)
-        }
-        orderProcessingService.errors = []
-        orderProcessingService.messages = []
         redirect(action: 'show', id: params.id)
     }
 
-    def parseOrders() {
-        def orders = orderService.parseOrders()
-        if (orderService.errors) {
-            flash.error = ArconUtil.convertMessageToString(orderProcessingService.errors, true)
-        } else {
-            flash.message = ArconUtil.convertMessageToString(["Orders ${orders.orderID} processed."], false)
-        }
-        if (orderService.messages) {
-            flash.message = ArconUtil.convertMessageToString(orderProcessingService.messages, false)
-        }
-        orderProcessingService.errors = []
-        orderProcessingService.messages = []
-        redirect(action: 'index')
-    }
     def processOrders() {
-        def orders = orderProcessingService.processOrders()
-        if (orderProcessingService.errors) {
-            flash.error = ArconUtil.convertMessageToString(orderProcessingService.errors, true)
-        } else {
-            flash.message = ArconUtil.convertMessageToString(["Orders ${orders.orderID} processed."], false)
+        try {
+            def orders = orderProcessingService.processOrders()
+            flash.message = (orders) ? "Orders ${orders.orderID} processed." : 'No orders to process'
+        } catch (OrderProcessingException e) {
+            new OrderError(orderId: e.orderId, error: e.message).save()
+            flash.error = ArconUtil.convertMessageToString([e.message], true)
         }
-        if (orderProcessingService.messages) {
-            println orderProcessingService.messages.flatten()
-            flash.message = ArconUtil.convertMessageToString(orderProcessingService.messages, false)
-        }
-        orderProcessingService.errors = []
-        orderProcessingService.messages = []
         redirect(action: 'list')
     }
 
@@ -65,7 +45,15 @@ class ArconOrderController {
 
     def list() {
         def list = ArconOrder.list()
-        [arconOrderInstanceList: list, arconOrderInstanceTotal: ArconOrder.count()]
+        def unprocessedErrors = OrderError.findAllByProcessed(false)
+        [arconOrderInstanceList: list, arconOrderInstanceTotal: ArconOrder.count(), unprocessedErrors: unprocessedErrors]
+    }
+
+    def clearError() {
+        OrderError orderError = OrderError.get(params.id)
+        orderError.processed = true
+        orderError.save()
+        redirect(action: "list", params: params)
     }
 
     def create() {
@@ -84,14 +72,15 @@ class ArconOrderController {
     }
 
     def show() {
-        def arconOrderInstance = ArconOrder.get(params.id)
+        def arconOrderInstance = ArconOrder.get(params.id) ?: ArconOrder.findByOrderID(params.orderId)
         if (!arconOrderInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'arconOrder.label', default: 'ArconOrder'), params.id])
             redirect(action: "list")
             return
         }
-
-        [arconOrderInstance: arconOrderInstance]
+        def unprocessedErrors = OrderError.findAllByOrderId(arconOrderInstance.orderID).findAll { !it.processed }
+        println unprocessedErrors
+        [arconOrderInstance: arconOrderInstance, unprocessedErrors: unprocessedErrors]
     }
 
     def edit() {

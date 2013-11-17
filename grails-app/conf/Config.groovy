@@ -130,5 +130,21 @@ grails {
               "mail.smtp.socketFactory.fallback":"false"]
    }
 }
-
+grails.plugins.springsecurity.securityConfigType = "InterceptUrlMap"
+grails.plugins.springsecurity.interceptUrlMap = [
+   '/js/**':        ['IS_AUTHENTICATED_ANONYMOUSLY'],
+   '/css/**':       ['IS_AUTHENTICATED_ANONYMOUSLY'],
+   '/images/**':    ['IS_AUTHENTICATED_ANONYMOUSLY'],
+   '/*':            ['IS_AUTHENTICATED_ANONYMOUSLY'],
+   '/login/**':     ['IS_AUTHENTICATED_ANONYMOUSLY'],
+   '/logout/**':    ['IS_AUTHENTICATED_ANONYMOUSLY'],
+   '/arconOrder/**':        ['ROLE_ADMIN'],
+   '/dubowSubmission/**':   ['ROLE_ADMIN'],
+   '/orderError/**':        ['ROLE_ADMIN'],
+   '/product/**':           ['ROLE_ADMIN'],
+   '/site/**':              ['ROLE_ADMIN'],
+   '/user/**':              ['ROLE_ADMIN'],
+]
+grails.plugin.springsecurity.dao.reflectionSaltSourceProperty = 'username'
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.arconorders.User'
 grails.plugin.cloudfoundry.showStackTrace = true

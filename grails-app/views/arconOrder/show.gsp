@@ -14,12 +14,21 @@
 <p>
     <g:link action="resendOrder" id="${arconOrderInstance.id}" class="btn btn-danger">Resend Order</g:link>
 </p>
+<g:each in="${unprocessedErrors}" var="error">
+    <div class="alert alert-error"><p>${error.error} ${error.dateCreated} [<g:link action="clearError" id="${error.id}">clear</g:link>]</p></div>
+</g:each>
 
 <section id="show-arconOrder" class="first">
 
 	<table class="table table-bordered table-striped">
 		<tbody>
 		
+        <tr class="prop">
+            <td valign="top" class="name"><g:message code="arconOrder.success.label" default="Success" /></td>
+            
+            <td valign="top" class="value"><g:formatBoolean boolean="${arconOrderInstance?.success}" /></td>
+
+        </tr>
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="arconOrder.firstName.label" default="First Name" /></td>
 				
@@ -125,13 +134,7 @@
 				
 			</tr>
 
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="arconOrder.success.label" default="Success" /></td>
-				
-				<td valign="top" class="value"><g:formatBoolean boolean="${arconOrderInstance?.success}" /></td>
-				
-			</tr>
-		
+
 		</tbody>
 	</table>
     <h2>Order Details</h2>
@@ -147,7 +150,7 @@
         <tbody>
             <g:each in="${arconOrderInstance.orderDetails}" var="o">
                 <tr>
-                    <td><g:link controller="product" action="show" id="${o.product.id}">${o.productCode}</g:link> </td>
+                    <td><g:link controller="product" action="show" id="${o.product?.id}">${o.productCode}</g:link> </td>
                     <td>${o.productName}</td>
                     <td>${o.quantity}</td>
                     <td>${o.productOptions}</td>

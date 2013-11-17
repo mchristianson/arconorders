@@ -30,7 +30,9 @@
 <p>
     <g:link action="processOrders" class="btn btn-danger">Process Orders</g:link>
 </p>
-
+<g:each in="${unprocessedErrors}" var="error">
+    <div class="alert alert-error"><p>${error.error} ${error.dateCreated} [<g:link controller="arconOrder" action="show" params="[orderId: error.orderId]">view</g:link>] [<g:link action="clearError" id="${error.id}">clear</g:link>]</p></div>
+</g:each>
 <section id="list-arconOrder" class="first">
 	<table class="table table-bordered datatablea">
 		<thead>
@@ -44,7 +46,7 @@
 		</thead>
 		<tbody>
 		<g:each in="${arconOrderInstanceList}" status="i" var="arconOrderInstance">
-			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+			<tr class="${(i % 2) == 0 ? 'odd' : 'even'} ${arconOrderInstance?.success ? '' : 'error'}">
 			
                 <td>${fieldValue(bean: arconOrderInstance, field: "orderID")}</td>
                 <td>${arconOrderInstance.orderDate.replace('AM','').replace('PM','')}</td>

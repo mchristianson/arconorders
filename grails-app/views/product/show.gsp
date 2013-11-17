@@ -14,6 +14,9 @@
 <p>
     <g:link action="verifyProduct" id="${productInstance.id}" class="btn btn-danger to_modal" >Verify Product</g:link>
 </p>
+<g:if test="${!productInstance.dubowProductName}">
+    <div class="alert alert-error" role="status"><p>This product was not found at Dubow</p></div>
+</g:if>
 <section id="show-product" class="first">
 
 	<table class="table table-bordered table-striped">
@@ -33,6 +36,20 @@
 				
 			</tr>
 		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.dubowProductId.label" default="Dubow Product Name" /></td>
+
+				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "dubowProductName")}</td>
+
+			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="product.dubowProductId.label" default="Dubow Product Desc" /></td>
+
+				<td valign="top" class="value">${fieldValue(bean: productInstance, field: "dubowProductDesc")}</td>
+
+			</tr>
+
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="product.code.label" default="Code" /></td>
 				

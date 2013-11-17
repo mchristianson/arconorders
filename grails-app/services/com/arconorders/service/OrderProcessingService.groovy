@@ -1,5 +1,7 @@
 package com.arconorders.service
 
+import com.arconorders.ArconOrder
+import com.arconorders.exception.OrderProcessingException
 import groovy.xml.XmlUtil
 import groovyx.net.http.RESTClient
 
@@ -15,46 +17,32 @@ class OrderProcessingService {
     def orderService
     def emailService
 
-    def errors = []
-    def messages = []
-
-    def processOrders() {
-        orderService.errors = []
-        orderService.messages = []
-        def orders = orderService.parseOrders()
-        if (orderService.errors) errors << orderService.errors
-        if (orderService.messages) messages << orderService.messages
+    public List<ArconOrder> processOrders() throws OrderProcessingException {
+        List<ArconOrder> orders = orderService.parseOrders()
         if (orders) {
             convertAndSendOrders(orders)
         }
         orders
     }
 
-    def convertAndSendOrders(orders) {
-        if (orders.orderDetails.product.flatten().any {it != null}) {
-            def orderString = transformOrders(orders)
-            DubowSubmission submission = new DubowSubmission(requestXmlString: orderString, arconOrders: orders)
+    public DubowSubmission convertAndSendOrders(List<ArconOrder> orders) throws OrderProcessingException {
+        if (!orders.orderDetails.product.flatten().any {it != null}) throw new OrderProcessingException("Error: Nothing to send to Dubow.")
+        def orderString = transformOrders(orders)
+        DubowSubmission submission = new DubowSubmission(requestXmlString: orderString, arconOrders: orders)
 
-            if (orderString.contains('LineItems')) {
-                messages << "sending it!!!!"
-                println orderString
+        if (!orderString.contains('LineItems')) throw new OrderProcessingException("Error finding products. Order not sent.")
+        println orderString
 
-                if (sendOrders(submission)) {
-                    orders.each {
-                        it.success = true
-                        it.save()
-                    }
-                }
-            } else {
-                errors << "Error finding products. Order not sent."
+        if (sendOrders(submission)) {
+            orders.each {
+                it.success = true
+                it.save()
             }
-            submission.save(failOnError: true)
-        } else {
-            errors << "Nothing to send to Dubow."
         }
+        submission.save(failOnError: true)
     }
 
-    def transformOrders(arconOrders) {
+    public String transformOrders(List<ArconOrder> arconOrders) throws OrderProcessingException{
         def sw = new StringWriter()
         def now = new Date()
 
@@ -91,73 +79,79 @@ class OrderProcessingService {
                                      LineItems() {
                                         order.orderDetails.each { lineItem ->
                                             def product = lineItem.product
-                                            if (!product) {
-                                                new OrderError(orderId: order?.orderID, error: "SPREADSHEET PRODUCT NOT FOUND! ${lineItem.productCode} - ${lineItem.getOption('Color')}").save()
-                                                errors << "SPREADSHEET PRODUCT NOT FOUND! ${lineItem.productCode} - ${lineItem.getOption('Color')}"
-                                            } else if (!productService.verifyProduct(product.vendorCode, product.mill)) {
-                                                new OrderError(orderId: order?.orderID, error: "DUBOW PRODUCT NOT FOUND! code:${product.vendorCode}, mil:${product.mill}").save()
-                                                errors << "DUBOW PRODUCT NOT FOUND! code:${product.vendorCode}, mil:${product.mill}"
-                                            } else if (!lineItem.quantity) {
-                                                errors << "Zero quantity. Must be an update."
-                                            } else {
-                                                Notes(order.comments)
-                                                IntegrationLineItem() {
-                                                    Name("LINEITEM_${lineItem.id}")
-                                                    IntegrationProduct() {
-                                                        Color(lineItem.getOption('Color'))
-                                                        Description(product.name)
-                                                        //                                                ProductTypeName('') ///???
-    //                                                    ProductID(product.dubowProductId)
-                                                        if (product.mill) {
-                                                            VendorProductName(product.vendorCode)
-                                                            Mill(product.mill)
-                                                        } else {
-                                                            ProductName(product.vendorCode)
-                                                        }
-                                                        ProcurementType(product.procurementType)
+
+                                            if (!product) throw new OrderProcessingException(order?.orderID?.toString(), "Product Not Found! ${lineItem.productCode} - ${lineItem.getOption('Color')}")
+
+                                            if (!productService.verifyProductExistsAtDubow(product)) throw new OrderProcessingException(order?.orderID.toString(), "Could not verify product ${lineItem.productCode} - ${lineItem.getOption('Color')} ID: ${lineItem.dubowProductId}")
+
+                                            if (!lineItem.quantity)  throw new OrderProcessingException(order?.orderID.toString(), "Zero quantity. Must be an update")
+
+                                            if (!product.validate()) {
+                                                String errorMessage = product.errors.allErrors.collect { "[${it.field}: ${it.defaultMessage}] "}
+                                                throw new OrderProcessingException(order?.orderID.toString(), "Product not valid: ${errorMessage}")
+                                            }
+
+                                            if (!lineItem.getOption('Color')) throw new OrderProcessingException(order?.orderID.toString(), "Color missing for product: ${product}")
+
+                                            Notes(order.comments)
+                                            IntegrationLineItem() {
+                                                Name("LINEITEM_${lineItem.id}")
+                                                IntegrationProduct() {
+                                                    Color(lineItem.getOption('Color'))
+                                                    Description(product.name)
+//                                                      ProductTypeName('') ///???
+                                                    ProductID(product.dubowProductId)
+//                                                        if (product.mill) {
+//                                                            VendorProductName(product.vendorCode)
+//                                                            Mill(product.mill)
+//                                                        } else {
+//                                                            ProductName(product.vendorCode)
+//                                                        }
+                                                    ProcurementType(product.procurementType)
+                                                }
+                                                LineItemSizes() {
+                                                    IntegrationLineItemSize() {
+                                                        Quantity(lineItem.quantity)
+                                                        SizeIndex(lineItem.sizeIndex)
+                                                        SizeAsString(lineItem.getOption('Size') ?: 'NoSize')
                                                     }
-                                                    LineItemSizes() {
-                                                        IntegrationLineItemSize() {
-                                                            Quantity(lineItem.quantity)
-                                                            SizeIndex(lineItem.sizeIndex)
-                                                            SizeAsString(lineItem.getOption('Size') ?: 'NoSize')
-                                                        }
-                                                    }
-                                                    if (product.designNumber || product.appliqueDesignNumber) {
-                                                        Designs() {
-                                                            if (product.designNumber) {
-                                                                IntegrationDesign() {
-                                                                    DesignID(product.designNumber)
-                                                                    DesignTypeName('Embroidery')
-                                                                    // Notes('These are some design Notes.')  /// ????
-                                                                    if (lineItem.getOption('Personalization')) {
-                                                                        Customizations() {
-                                                                            DesignCustomization() {
-                                                                                Position(product.personalization)
-                                                                                Color(product.personalizationColor)
-                                                                                TextLines() {
-                                                                                    TextLine() {
-                                                                                        LineNumber(1)
-                                                                                        Text(lineItem.getOption('Personalization'))
-                                                                                    }
+                                                }
+                                                if (product.designNumber || product.appliqueDesignNumber) {
+                                                    Designs() {
+                                                        if (product.designNumber) {
+                                                            IntegrationDesign() {
+                                                                //Name()
+                                                                DesignTypeName('Embroidery')
+                                                                DesignID(product.designNumber)
+                                                                // Notes('These are some design Notes.')  /// ????
+                                                                if (lineItem.getOption('Personalization')) {
+                                                                    Customizations() {
+                                                                        DesignCustomization() {
+                                                                            //Font()
+                                                                            Color(product.personalizationColor)
+                                                                            Position(product.personalization)
+                                                                            TextLines() {
+                                                                                TextLine() {
+                                                                                    LineNumber(1)
+                                                                                    Text(lineItem.getOption('Personalization'))
                                                                                 }
                                                                             }
                                                                         }
                                                                     }
-                                                                    IntegrationColorway() {
-                                                                        GarmentLocationName(product.location)
-                                                                        ColorwayID(product.colorWay)
-                                                                    }
+                                                                }
+                                                                IntegrationColorway() {
+                                                                    GarmentLocationName(product.location)
+                                                                    ColorwayID(product.colorWay)
                                                                 }
                                                             }
-                                                            if (product.appliqueDesignNumber && lineItem.getOption('Add Full Back Logo?')) {
-                                                                IntegrationDesign() {
-                                                                    DesignID(product.appliqueDesignNumber)
-                                                                    DesignTypeName('Embroidery')
-                                                                    IntegrationColorway() {
-                                                                        GarmentLocationName(product.appliqueLocation)
-                                                                        ColorwayID(product.appliqueColorWay)
-                                                                    }
+                                                        }
+                                                        if (product.appliqueDesignNumber && lineItem.getOption('Add Full Back Logo?')) {
+                                                            IntegrationDesign() {
+                                                                DesignTypeName('Embroidery')
+                                                                DesignID(product.appliqueDesignNumber)
+                                                                IntegrationColorway() {
+                                                                    GarmentLocationName(product.appliqueLocation)
+                                                                    ColorwayID(product.appliqueColorWay)
                                                                 }
                                                             }
                                                         }
@@ -200,10 +194,11 @@ class OrderProcessingService {
                 dubowSubmission.successful = true
                 statusStr +=  "Succesfully sent order to Dubow"
             } else {
-                new OrderError(error:"Error sending orders to Dubow")
+                throw new OrderProcessingException(orderId: dubowSubmission.arconOrders.orderId.toString(), error: "Error sending to Dubow: [${response.data.ResponseSummary.Errors}]")
             }
             statusStr +=  serialize(response.data)
         } else {
+            throw new OrderProcessingException(orderId: dubowSubmission.arconOrders.orderId.toString(), error: "Error sending to Dubow: [unknown]")
             statusStr +=  "Error sending orders to Dubow"
         }
         statusStr += "\n"
@@ -231,7 +226,7 @@ class OrderProcessingService {
 
     }
 
-    private getShippingMethod(fullAddress, state) {
+    private String getShippingMethod(fullAddress, state) {
         (fullAddress.contains('box')) ? 'USPS' : (['MN', 'ND', 'SD', 'NE', 'IA', 'IL', 'WI'].contains(state)) ? 'SPEDE' : 'UPSG'
     }
 }

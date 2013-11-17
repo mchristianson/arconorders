@@ -52,7 +52,6 @@
             <th>Vendor Code</th>
 
             <th>Dubow Product Id</th>
-
             <th>Code</th>
             <th>Name</th>
             <th>Mill</th>
@@ -63,12 +62,12 @@
         </thead>
         <tbody>
             <g:each in="${productInstanceList}" status="i" var="productInstance">
-			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+			<tr class="${(i % 2) == 0 ? 'odd' : 'even'} ${productInstance.dubowProductName ? '' : 'error'}" id="${productInstance.id}">
 			
 				<td><g:link action="show" id="${productInstance.id}">${fieldValue(bean: productInstance, field: "vendorCode")}</g:link></td>
 			
 				<td>${fieldValue(bean: productInstance, field: "dubowProductId")}</td>
-			
+
 				<td>${fieldValue(bean: productInstance, field: "code")}</td>
 			
 				<td>${fieldValue(bean: productInstance, field: "name")}</td>

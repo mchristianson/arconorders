@@ -44,7 +44,7 @@ class ArconOrder {
         country(nullable: true)
         comments(nullable: true)
         site(nullable: false)
-        orderDetails(nullable: false)
+        orderDetails(nullable: true)
         dubowSubmissions(nullable: true)
     }
 
@@ -93,7 +93,7 @@ class ArconOrder {
                 ${address1} ${address2}<br/>
                 ${address2}
                 ${city}, ${state} ${postalCode}</td>
-            <td>${orderDetails.htmlFormattedString.join("<br/>")}</td>
+            <td>${orderDetails?.htmlFormattedString?.join("<br/>")}</td>
             </tr>
             </tbody>
             </table>

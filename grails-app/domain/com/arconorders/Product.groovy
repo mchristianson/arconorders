@@ -5,6 +5,8 @@ class Product {
 
     String vendorCode
     String dubowProductId
+    String dubowProductName
+    String dubowProductDesc
     String code
     String name
     String mill
@@ -25,7 +27,9 @@ class Product {
 
     static constraints = {
         vendorCode(nullable:false, blank:false)
-        dubowProductId(nullable:true, blank:true)
+        dubowProductId(nullable:false, blank:false)
+        dubowProductName(nullable:true, blank:true)
+        dubowProductDesc(nullable:true, blank:true)
         code(nullable:false, blank:false)
         name(nullable:false, blank:false)
         mill(nullable:true, blank:true)
