@@ -44,7 +44,7 @@
 </p>
 <section id="list-product" class="first">
     <form class="plain" action="" method="post" enctype="multipart/form-data">
-
+        ${productInstanceList[0].colorWay}
     <table class="table table-bordered datatablea">
         <thead>
         <tr>
@@ -64,21 +64,21 @@
             <g:each in="${productInstanceList}" status="i" var="productInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'} ${productInstance.dubowProductName ? '' : 'error'}" id="${productInstance.id}">
 			
-				<td><g:link action="show" id="${productInstance.id}">${fieldValue(bean: productInstance, field: "vendorCode")}</g:link></td>
+				<td><g:link action="show" id="${productInstance.id}">${productInstance.vendorCode}</g:link></td>
 			
-				<td>${fieldValue(bean: productInstance, field: "dubowProductId")}</td>
+				<td>${productInstance.dubowProductId}</td>
 
-				<td>${fieldValue(bean: productInstance, field: "code")}</td>
+				<td>${productInstance.code}</td>
 			
-				<td>${fieldValue(bean: productInstance, field: "name")}</td>
+				<td>${productInstance.name}</td>
 			
-				<td>${fieldValue(bean: productInstance, field: "mill")}</td>
+				<td>${productInstance.mill}</td>
 			
-				<td>${fieldValue(bean: productInstance, field: "color")}</td>
+				<td>${productInstance.color}</td>
 
-				<td>${fieldValue(bean: productInstance, field: "colorWay")}</td>
+				<td>${productInstance.colorWay}</td>
 
-				<td>${fieldValue(bean: productInstance, field: "designNumber")}</td>
+				<td>${productInstance.designNumber}</td>
 
 			</tr>
 		</g:each>

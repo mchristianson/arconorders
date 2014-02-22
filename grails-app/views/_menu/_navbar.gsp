@@ -25,6 +25,7 @@
                                 <g:link controller="orderError">Errors</g:link>
                                 <g:link controller="dubowSubmission">Submissions</g:link>
                                 <g:link controller="user">Users</g:link>
+                                <g:link controller="site" action="codes">Generate Codes</g:link>
 						</ul>
 					</li>
 				</ul>

@@ -212,7 +212,7 @@ class OrderProcessingService {
     }
 
     def getUniqueID(int length = 10) {
-        String validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+        String validChars = "ABCDEFGHJKMNPQRSTWXYZ23456789"
         int maxIndex = validChars.length()
         def rnd = new Random()
         (1..length).sum { validChars[rnd.nextInt(maxIndex)]}

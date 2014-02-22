@@ -30,10 +30,10 @@ class ProductController {
 
     def updateRow() {
         def productInstance = Product.get(params.id)
-        productInstance."${params.columnName}" = params.value
+        productInstance."${params.columnName}" = (productInstance."${params.columnName}" instanceof Integer) ? params.value as Integer : params.value
         productInstance = productService.verifyProduct(productInstance)
-        productInstance.save()
-        render params.value
+        def result = productInstance.save() ? params.value : 'Value invalid'
+        render result
     }
 
     def index() {

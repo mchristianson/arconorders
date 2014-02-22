@@ -18,7 +18,7 @@
 		<g:renderErrors bean="${siteInstance}" as="list" />
 	</div>
 	</g:hasErrors>
-	
+
 	<g:form action="save" class="form-horizontal" >
 		<fieldset class="form">
 			<g:render template="form"/>
@@ -28,9 +28,9 @@
             <button class="btn" type="reset">Cancel</button>
 		</div>
 	</g:form>
-	
+
 </section>
-		
+
 </body>
 
 </html>

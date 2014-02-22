@@ -1,5 +1,6 @@
 package com.arconorders
 
+import com.arconorders.service.OrderProcessingService
 import org.springframework.dao.DataIntegrityViolationException
 
 /**
@@ -9,6 +10,37 @@ import org.springframework.dao.DataIntegrityViolationException
 class SiteController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+
+    OrderProcessingService orderProcessingService
+
+    def codes() {
+
+    }
+
+    def generateCodes() {
+        Integer discountStartingId = params.discountStartingId as Integer
+
+        Integer numberGiftCodes = params.numberGiftCodes as Integer
+        Integer giftCodesAmount = params.giftCodesAmount as Integer
+
+        Integer numberShippingCodes = params.numberShippingCodes as Integer
+        Integer shippingCodesAmount = params.shippingCodesAmount as Integer
+
+        String header = "discountautoid,name,minqty,maxqty,discounttype,discountvalue,lastmodified,span,begindate,enddate,minorderprice,maxorderprice,apply_to_all_orders,lastmodby,couponcode,onetimeuse,cannot_use_with_any_other,taxable_discountaftertax,couponusage\n"
+        List rows = []
+        numberGiftCodes.times {
+            rows << "${discountStartingId++},\$${giftCodesAmount} Gift,,,Per Order,${giftCodesAmount},10/8/13 14:39,N,,,,,,1,${orderProcessingService.getUniqueID(5)},Y,Y,0,SingleUsePerCustomer"
+        }
+        numberShippingCodes.times {
+            rows << "${discountStartingId++},Free Shipping,,,Free Shipping,${shippingCodesAmount},10/8/13 14:39,N,,,,,,1,${orderProcessingService.getUniqueID(5)},Y,N,0,SingleUsePerCustomer"
+        }
+        String csv = header + rows.join('\n')
+        response.setContentType("application/octet-stream")
+
+        response.setHeader("Content-disposition", "attachment;filename=discount_codes.csv")
+
+        render(text:csv,contentType:"text/plain",encoding:"UTF-8")
+    }
 
     def index() {
         redirect(action: "list", params: params)

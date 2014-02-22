@@ -1,5 +1,8 @@
 package com.arconorders.exception
 
+import groovy.transform.CompileStatic
+
+@CompileStatic
 class OrderProcessingException extends RuntimeException {
     String orderId
 

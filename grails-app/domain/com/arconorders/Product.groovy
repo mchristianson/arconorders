@@ -27,15 +27,15 @@ class Product {
 
     static constraints = {
         vendorCode(nullable:false, blank:false)
-        dubowProductId(nullable:false, blank:false)
+        dubowProductId(nullable:false, blank:false, matches: "^[0-9]*\$")
         dubowProductName(nullable:true, blank:true)
         dubowProductDesc(nullable:true, blank:true)
         code(nullable:false, blank:false)
         name(nullable:false, blank:false)
         mill(nullable:true, blank:true)
         color(nullable:true, blank:true)
-        designNumber(nullable:true, blank:true)
-        colorWay(nullable:true, blank:true)
+        designNumber(nullable:true, blank:true, matches: "^[0-9]*\$")
+        colorWay(nullable:true, blank:true, matches: "^[0-9]*\$")
         location(nullable:true, blank:true)
         personalization(nullable:true, blank:true)
         personalizationColor(nullable:true, blank:true)
@@ -45,6 +45,9 @@ class Product {
         appliqueLocation(nullable:true, blank:true)
     }
 
+    private static integerValidator = {val, obj ->
+
+    }
     String toString() {
         "$code: $name [$color]"
     }
