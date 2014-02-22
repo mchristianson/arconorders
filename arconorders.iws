@@ -2,19 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d194b5be-908b-4d82-8f79-591e4c1fe70c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/site/codes.gsp" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/arconorders-grailsPlugins.iml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/groovy/com/arconorders/exception/OrderProcessingException.groovy" afterPath="$PROJECT_DIR$/src/groovy/com/arconorders/exception/OrderProcessingException.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/com/arconorders/service/OrderProcessingService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/com/arconorders/service/OrderProcessingService.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/com/arconorders/Product.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/com/arconorders/Product.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/com/arconorders/ProductController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/com/arconorders/ProductController.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/com/arconorders/SiteController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/com/arconorders/SiteController.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/_menu/_navbar.gsp" afterPath="$PROJECT_DIR$/grails-app/views/_menu/_navbar.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/ApplicationResources.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/ApplicationResources.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/Config.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/DataSource.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/DataSource.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/UrlMappings.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/UrlMappings.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application.properties" afterPath="$PROJECT_DIR$/application.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arconorders-grailsPlugins.iml" afterPath="$PROJECT_DIR$/arconorders-grailsPlugins.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arconorders.iml" afterPath="$PROJECT_DIR$/arconorders.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arconorders.iws" afterPath="$PROJECT_DIR$/arconorders.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/site/create.gsp" afterPath="$PROJECT_DIR$/grails-app/views/site/create.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/product/list.gsp" afterPath="$PROJECT_DIR$/grails-app/views/product/list.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/stacktrace.log" afterPath="$PROJECT_DIR$/target/stacktrace.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/spring/resources.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/spring/resources.groovy" />
     </list>
     <ignored path="arconorders.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -126,7 +124,7 @@
       <file leaf-file-name="Config.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="107" column="105" selection-start="5030" selection-end="5125" vertical-scroll-proportion="0.0" vertical-offset="2247" max-vertical-offset="3276">
+            <state line="115" column="0" selection-start="4646" selection-end="4646" vertical-scroll-proportion="0.0" vertical-offset="2415" max-vertical-offset="2541">
               <folding />
             </state>
           </provider>
@@ -150,19 +148,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="build.gradle" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="25" selection-start="339" selection-end="339" vertical-scroll-proportion="0.60638297" vertical-offset="0" max-vertical-offset="693">
+            <state line="19" column="24" selection-start="338" selection-end="338" vertical-scroll-proportion="-15.346154" vertical-offset="0" max-vertical-offset="693">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.properties" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="application.properties" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="19" selection-start="71" selection-end="76" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315">
+            <state line="10" column="0" selection-start="259" selection-end="259" vertical-scroll-proportion="0.30701753" vertical-offset="0" max-vertical-offset="684">
               <folding />
             </state>
           </provider>
@@ -226,6 +224,7 @@
         <option value="$PROJECT_DIR$/grails-app/domain/com/arconorders/Product.groovy" />
         <option value="$PROJECT_DIR$/grails-app/controllers/com/arconorders/ProductController.groovy" />
         <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/application.properties" />
       </list>
     </option>
   </component>
@@ -307,11 +306,11 @@
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -323,6 +322,7 @@
     <property name="last_directory_selection" value="$PROJECT_DIR$/test/integration" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="Groovy JUnit" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
+    <property name="last_opened_file_path" value="$USER_HOME$/.gvm/grails/2.3.6/dist" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
@@ -506,7 +506,7 @@
       <workItem from="1386170151903" duration="3662000" />
       <workItem from="1386770666470" duration="1938000" />
       <workItem from="1388418869255" duration="6706000" />
-      <workItem from="1393093419283" duration="920000" />
+      <workItem from="1393093419283" duration="2294000" />
     </task>
     <task id="LOCAL-00001" summary="Another round of changes">
       <created>1381801886278</created>
@@ -516,11 +516,15 @@
       <created>1384698023722</created>
       <updated>1384698023722</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Adding generate codes">
+      <created>1393094426135</created>
+      <updated>1393094426135</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62464000" />
+    <option name="totallyTimeSpent" value="63838000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1860" height="1178" extended-state="6" />
@@ -528,37 +532,37 @@
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32830188" sideWeight="0.49667773" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2498621" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5061538" sideWeight="0.5626034" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39981097" sideWeight="0.4373966" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289225" sideWeight="0.49835795" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924527" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32830188" sideWeight="0.49835795" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32984003" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19746974" sideWeight="0.67160034" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293247" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5061538" sideWeight="0.5626034" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32984003" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293247" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5261997" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -612,7 +616,8 @@
     </option>
     <MESSAGE value="Another round of changes" />
     <MESSAGE value="Adding better error handling and spring security&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding better error handling and spring security&#10;" />
+    <MESSAGE value="Adding generate codes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding generate codes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -664,12 +669,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/site/codes.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="85" selection-start="2394" selection-end="2394" vertical-scroll-proportion="0.0" vertical-offset="1071" max-vertical-offset="1512" />
+        <state line="51" column="85" selection-start="2394" selection-end="2394" vertical-scroll-proportion="0.0" vertical-offset="1071" max-vertical-offset="1512">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/site/_form.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="0" selection-start="518" selection-end="1012" vertical-scroll-proportion="0.0" vertical-offset="399" max-vertical-offset="1071" />
+        <state line="19" column="0" selection-start="518" selection-end="1012" vertical-scroll-proportion="0.0" vertical-offset="399" max-vertical-offset="1071">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/site/create.gsp">
@@ -693,7 +702,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/com/arconorders/ArconOrderController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="0" selection-start="1203" selection-end="1203" vertical-scroll-proportion="0.0" vertical-offset="693" max-vertical-offset="3171" />
+        <state line="33" column="0" selection-start="1203" selection-end="1203" vertical-scroll-proportion="0.0" vertical-offset="693" max-vertical-offset="3171">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/services/com/arconorders/service/OrderProcessingService.groovy">
@@ -757,7 +768,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/com/arconorders/ArconOrderController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="0" selection-start="1203" selection-end="1203" vertical-scroll-proportion="0.0" vertical-offset="693" max-vertical-offset="3171" />
+        <state line="33" column="0" selection-start="1203" selection-end="1203" vertical-scroll-proportion="0.0" vertical-offset="693" max-vertical-offset="3171">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gvm/grails/2.2.1/lib/org.springframework/spring-webmvc/jars/spring-webmvc-3.1.4.RELEASE.jar!/org/springframework/web/servlet/tags/form/ErrorsTag.class">
@@ -799,7 +812,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/site/_form.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="0" selection-start="518" selection-end="1012" vertical-scroll-proportion="0.0" vertical-offset="399" max-vertical-offset="1071" />
+        <state line="19" column="0" selection-start="518" selection-end="1012" vertical-scroll-proportion="0.0" vertical-offset="399" max-vertical-offset="1071">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/_header.gsp">
@@ -843,7 +858,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/site/codes.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="85" selection-start="2394" selection-end="2394" vertical-scroll-proportion="0.0" vertical-offset="952" max-vertical-offset="1512" />
+        <state line="51" column="85" selection-start="2394" selection-end="2394" vertical-scroll-proportion="0.0" vertical-offset="952" max-vertical-offset="1512">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/domain/com/arconorders/DubowSubmission.groovy">
@@ -858,7 +875,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="107" column="105" selection-start="5030" selection-end="5125" vertical-scroll-proportion="0.0" vertical-offset="1959" max-vertical-offset="3276">
+        <state line="115" column="0" selection-start="4646" selection-end="4646" vertical-scroll-proportion="0.0" vertical-offset="2415" max-vertical-offset="2541">
           <folding />
         </state>
       </provider>
@@ -941,16 +958,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application.properties">
+    <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="19" selection-start="71" selection-end="76" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315">
+        <state line="19" column="24" selection-start="338" selection-end="338" vertical-scroll-proportion="-15.346154" vertical-offset="0" max-vertical-offset="693">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
+    <entry file="file://$PROJECT_DIR$/application.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="25" selection-start="339" selection-end="339" vertical-scroll-proportion="0.60638297" vertical-offset="0" max-vertical-offset="693">
+        <state line="10" column="0" selection-start="259" selection-end="259" vertical-scroll-proportion="0.30701753" vertical-offset="0" max-vertical-offset="684">
           <folding />
         </state>
       </provider>
@@ -962,7 +979,7 @@
         <entry key="arconorders">
           <value>
             <GrailsSettings>
-              <option name="buildConfigCrc" value="-2106430511" />
+              <option name="buildConfigCrc" value="-2138083140" />
               <option name="pluginDependenciesCrc" value="226096220" />
               <option name="properties">
                 <map>
@@ -1013,7 +1030,7 @@
       </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
-          <last-edited>grails-1.3.8</last-edited>
+          <last-edited>grails-2.3.6</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
